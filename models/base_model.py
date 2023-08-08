@@ -35,11 +35,11 @@ class BaseModel:
                returns a dictionary containing all keys/values of __dict__ of the instance 
             """
 
-            CpyObj = self.__dict__.copy() # a copy of __dict__
-            CpyObj['__class__'] = self.__class__.__name__
-            CpyObj['created_at'] = self.created_at.isoformat()
-            CpyObj['updated_at'] = self.updated_at.isoformat()
-            return (CpyObj)
+            cpy_obj = self.__dict__.copy() # a copy of __dict__
+            cpy_obj['__class__'] = self.__class__.__name__
+            cpy_obj['created_at'] = self.created_at.isoformat()
+            cpy_obj['updated_at'] = self.updated_at.isoformat()
+            return (cpy_obj)
 
         
 
