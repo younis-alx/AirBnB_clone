@@ -24,5 +24,11 @@ class BaseModel:
             """
             return f"[<{self.__class__.name}>] (<{self.id}>) <{self.__dict__}>"
         
+        def save(self):
+            """
+                updates the public instance attribute updated_at with the current datetime
+            """
+            self.updated_at = dt.now()
+
 
 
