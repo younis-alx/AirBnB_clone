@@ -10,6 +10,11 @@ class FileStorage:
     def all(self):
         """returns the dictionary __objects"""
         return FileStorage.__objects
+    
+    def new(self, obj):
+        """sets in __objects the obj with key <obj class name>.id"""
+        obj_key = str(obj.___class___.___name___) + '.' + str(obj.id)
+        
 
 
 
