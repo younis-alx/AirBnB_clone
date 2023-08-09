@@ -14,6 +14,11 @@ class BaseModel:
             created_at: datetime of creation
             updated_at: datetime of update
         """
+        if kwargs is not {}:
+
+            kwargs["created_at"] = kwargs["created_at"].isoformat()
+            kwargs["updated_at"] = kwargs["updated_at"].isoformat()
+                
         self.id = str(uuid.uuid4())
         self.created_at = dt.now()
         self.updated_at = dt.now()
