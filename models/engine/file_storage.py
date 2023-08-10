@@ -20,5 +20,10 @@ class FileStorage:
         with open(FileStorage.__file_path, mode='w', encoding="UTF8") as json_file:
            json.dump(FileStorage.__objects,json_file)
 
-
-
+    def reload(self):
+        """deserializes the JSON file to __objects (only if the JSON file (__file_path) exists ; otherwise, do nothing. If the file doesn’t exist, no exception should be raised)"""
+        try:
+            with open(FileStorage.__file_path, mode='r', encoding="UTF8") as obj:
+                FileStorage.__objects = json.load(obj)
+        except FileNotFoundError:
+            pass
