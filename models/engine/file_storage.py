@@ -28,6 +28,7 @@ class FileStorage:
         with open(FileStorage.__file_path, mode='w', encoding="UTF8") as json_file:
            json.dump(obj_dict,json_file)
 
+
     def reload(self):
         """Deserializes the JSON file to __objects if the file exists; otherwise, do nothing."""
         from models.base_model import BaseModel
