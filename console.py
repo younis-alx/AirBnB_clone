@@ -36,8 +36,17 @@ class HBNBCommand(cmd.Cmd):
 
 
     def do_show(self, line):
-         """Prints the string representation of an instance based on the class name and id. Ex: $ show BaseModel 1234-1234-1234."""
+        """Prints the string representation of an instance based on the class name and id. Ex: $ show BaseModel 1234-1234-1234."""
+        if len(line) == 0:
+            print("** class name missing **")
+            return
+        line = line.spilt()
+        if len(line) == 1:
+            print("** instance id missing")
+            return
         
+        
+
          
 if __name__ == '__main__':
         HBNBCommand().cmdloop()
