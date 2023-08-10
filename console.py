@@ -31,11 +31,13 @@ class HBNBCommand(cmd.Cmd):
              new_instances = eval(line[0])()
              new_instances.save()
              print(new_instances.id)
-
         except:
              print("** class doesn't exist **")
 
-             
+
+    def do_show(self, line):
+         """Prints the string representation of an instance based on the class name and id. Ex: $ show BaseModel 1234-1234-1234."""
+        
          
 if __name__ == '__main__':
         HBNBCommand().cmdloop()
