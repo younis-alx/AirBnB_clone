@@ -2,6 +2,7 @@
 
 import cmd
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 
 class HBNBCommand(cmd.Cmd):
     prompt = "(hbnb) "
@@ -28,15 +29,42 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
              line = line.split()
-             new_instances = eval(line[0])()
+             new_instances = eval(line[0])
              new_instances.save()
              print(new_instances.id)
-
         except:
              print("** class doesn't exist **")
 
-             
+
+    def do_show(self, line): #TODO refactor if have time
+        """Prints the string representation of an instance based on the class name and id. Ex: $ show BaseModel 1234-1234-1234."""
+        if len(line) == 0:
+            print("** class name missing **")
+            return
+        line = line.split()
+        if len(line) == 1:
+            print("** instance id missing")
+            return
+        storage = FileStorage()
+        storage.reload()
+        obj_dict = storage.all()
+        try:
+             eval(line[0])
+        except NameError:
+             print("** class doesn't exist **")
+             return
+        key = line[0] + "." + line[1]
+        try:
+            value = obj_dict[key]
+            print(value)
+        except KeyError:
+            print("** no instance found **")
+            return
+
+        
+        
+
          
 if __name__ == '__main__':
-        HBNBCommand().cmdloop()
+    HBNBCommand().cmdloop()
 
