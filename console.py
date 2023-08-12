@@ -146,7 +146,7 @@ class HBNBCommand(cmd.Cmd):
         try:
             attr_type = type(getattr(obj_value, line[2]))
             print(type(attr_type))
-            line[3] = attr_type(line[3])
+            line[3] = attr_type(line[3]) #TODO deemed irrelavant using new archti
             if attr_type == str:
                 if line[3][1] == "\"" and line[3][-2] == "\"":
                     line[3] = line[3][0] + line[3][2:-2] + line[3][-1]
