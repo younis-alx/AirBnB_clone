@@ -62,8 +62,17 @@ class HBNBCommand(cmd.Cmd):
             return
 
         
-        
-
+    def destroy(self, line):
+        """Deletes an instance based on the class name and id (save the change into the JSON file). Ex: $ destroy BaseModel 1234-1234-1234."""
+        line = line.split()
+        if len(line) == 0 and len(line[0]) == 0:
+            print("** class name missing **")
+            return
+        elif len(line) == 1:
+            print("** instance id missing **")
+            return
+        class_name_ = line[0]
+        class_id = line[1]
          
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
