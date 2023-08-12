@@ -71,8 +71,17 @@ class HBNBCommand(cmd.Cmd):
         elif len(line) == 1:
             print("** instance id missing **")
             return
-        class_name_ = line[0]
+        class_name = line[0]
         class_id = line[1]
+        storage = FileStorage()
+        storage.reload()
+        obj_dict = storage.all()
+        try:
+            eval(class_name)
+        except NameError:
+            print("** class doesn't exist **")
+            return
+        
          
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
