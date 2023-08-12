@@ -65,7 +65,7 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, line):
         """Deletes an instance based on the class name and id (save the change into the JSON file). Ex: $ destroy BaseModel 1234-1234-1234."""
         line = line.split()
-        if len(line) == 0 and len(line[0]) == 0:
+        if len(line) == 0:
             print("** class name missing **")
             return
         elif len(line) == 1:
@@ -95,29 +95,31 @@ class HBNBCommand(cmd.Cmd):
         storage.reload()
         objects = storage.all()
         obj_list = []
+        line = line.split()
 
         try:
-            if len(line) != 0:
-                eval(line)
+            if line and not eval(line[0]):
+                print("** class doesn't exist **")
+            elif not line:
+                for val in objects.values():
+                    obj_list.append(str(val))
+            else:
+                for val in objects.values():
+                    if line[0] == val.__class__.__name__:
+                        obj_list.append(str(val))
+            if len(line):           
+                print(obj_list)
         except NameError:
-            print("** class doesn't exist **")
-            return
-        for val in objects.values():
-            if line:
-                if type(val) is eval(line):
-                    obj_list.append(str(val))
-                else:
-                    obj_list.append(str(val))
-                
-        print(obj_list)
+                print("** class doesn't exist **")
+                return
 
 
     def do_update(self, line):
         """Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file). Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com"."""
         storage = FileStorage()
         storage.reload()
-        line = line.split(" ")
-        if len(line) == 1 and len(line[0]) == 0:
+        line = line.split()
+        if len(line) == 0:
             print("** class name missing **")
             return
         elif len(line) == 1:
@@ -143,11 +145,17 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             attr_type = type(getattr(obj_value, line[2]))
+            print(type(attr_type))
             line[3] = attr_type(line[3])
+            if attr_type == str:
+                if line[3][1] == "\"" and line[3][-2] == "\"":
+                    line[3] = line[3][0] + line[3][2:-2] + line[3][-1]
+
+            
         except AttributeError:
             pass
         setattr(obj_value, line[2], line[3])
-        storage.save()
+        obj_value.save()
 
 
 
