@@ -103,7 +103,45 @@ class HBNBCommand(cmd.Cmd):
         for val in objects.values():
             print(val)
     
-         
+    def do_update(self, line):
+        """Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file). Ex: $ update BaseModel 1234-1234-1234 email "aibnb@mail.com"."""
+        storage = FileStorage()
+        storage.reload()
+        line = line.split(" ")
+        if len(line) == 1 and len(line[0]) == 0:
+            print("** class name missing **")
+            return
+        elif len(line) == 1:
+            print("** instance id missing **")
+            return
+        elif len(line) == 2:
+            print("** attribute name missing **")
+            return
+        elif len(line) == 3:
+            print("** value missing **")
+            return
+        try:
+            eval(line[0])
+        except NameError:
+            print("** class doesn't exist **")
+            return
+        key = line[0] + "." + line[1]
+        obj_dict = storage.all()
+        try:
+            obj_value = obj_dict[key]
+        except KeyError:
+            print("** no instance found **")
+            return
+        try:
+            attr_type = type(getattr(obj_value, line[2]))
+            line[3] = attr_type(line[3])
+        except AttributeError:
+            pass
+        setattr(obj_value, line[2], line[3])
+        storage.save()
+
+
+
 if __name__ == '__main__':
     HBNBCommand().cmdloop()
 
