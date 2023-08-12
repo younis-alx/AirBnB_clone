@@ -29,7 +29,7 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
              line = line.split()
-             new_instances = eval(line[0])
+             new_instances = eval(line[0])()
              new_instances.save()
              print(new_instances.id)
         except:
