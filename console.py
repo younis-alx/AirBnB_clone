@@ -154,7 +154,7 @@ class HBNBCommand(cmd.Cmd):
             
         except AttributeError:
             pass
-        setattr(obj_value, line[2], line[3].replace("\"", ""))
+        setattr(obj_value, line[2], line[3].replace("\"", "").replace("\'", ""))
         obj_value.save()
 
 
