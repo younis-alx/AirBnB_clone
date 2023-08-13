@@ -1,8 +1,20 @@
 #!/usr/bin/python3
-
+"""
+BaseModel module:
+BaseModel that defines all\
+common attributes/methods\
+for other classes
+id: string - assign with an\
+uuid when an instance is created
+created_at: datetime - assign\
+with the current datetime\
+when an instance is created
+updated_at: datetime - assign\
+with the current datetime\
+when an instance is created and it will be updated
+"""
 import uuid
 from datetime import datetime as dt
-from models import storage
 
 
 class BaseModel:
@@ -18,6 +30,7 @@ class BaseModel:
             created_at: datetime of creation
             updated_at: datetime of update
         """
+        from models import storage 
         if kwargs:
 
             kwargs["created_at"] = dt.strptime(
@@ -49,6 +62,7 @@ class BaseModel:
             updates the public instance\
             attribute updated_at with the current datetime
         """
+        from models import storage
         self.updated_at = dt.now()
         storage.save()
 
