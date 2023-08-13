@@ -30,7 +30,7 @@ class BaseModel:
             created_at: datetime of creation
             updated_at: datetime of update
         """
-        from models import storage 
+        from models import storage
         if kwargs:
 
             kwargs["created_at"] = dt.strptime(
