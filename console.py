@@ -6,11 +6,18 @@ from models.engine.file_storage import FileStorage
 
 
 class HBNBCommand(cmd.Cmd):
+    """[HBNBCommand class]
 
+    Args:
+        cmd ([module]): [cmd module for command prompt]
+
+    Return:
+        [bool]: [true or false]
+    """
     prompt = "(hbnb) "
 
     def do_quit(self, line):
-        """quite the program"""
+        """quite cmd the program"""
 
         return True
 
