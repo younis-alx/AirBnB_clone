@@ -1,5 +1,15 @@
 #!/usr/bin/python3
+"""
+command-line intrepreter entry-point that utilize cmd module
+command interpreter implement:
+quit and EOF to exit the program
+help (this action is provided by\
+default by cmd but you should\
+keep it updated and documented as you work through tasks)
+a custom prompt: (hbnb)
+an empty line + ENTER shouldn’t execute anything
 
+"""
 import cmd
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
