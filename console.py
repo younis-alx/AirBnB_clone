@@ -11,6 +11,7 @@ an empty line + ENTER shouldn’t execute anything
 
 """
 import cmd
+import re
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 
@@ -181,15 +182,11 @@ class HBNBCommand(cmd.Cmd):
             return
         try:
             attr_type = type(getattr(obj_value, line[2]))
-            print(type(attr_type))
             line[3] = attr_type(line[3])
-            if attr_type == str:
-                if line[3][1] == "\"" and line[3][-2] == "\"":
-                    line[3] = line[3][0] + line[3][2:-2] + line[3][-1]
         except AttributeError:
             pass
         setattr(obj_value, line[2],
-                line[3].replace("\"", "").replace("\'", ""))
+                re.search(r'\w+', line[3]).group())
         obj_value.save()
 
 
