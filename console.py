@@ -123,7 +123,6 @@ class HBNBCommand(cmd.Cmd):
             return (1)
         return 0
 
-
     def do_create(self, line):
         """
          create: Creates a new instance of BaseModel.
