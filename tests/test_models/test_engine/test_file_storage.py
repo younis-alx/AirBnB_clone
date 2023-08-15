@@ -40,6 +40,12 @@ class testFileStorage(unittest.TestCase):
         storage_all = self.storage.all()
         self.assertIsInstance(storage_all, dict)
 
+    def test_all(self):
+        """Test that all() returns the __objects dictionary"""
+        Test that all() returns the __objects dictionary
+        objects = self.file_storage.all()
+        self.assertIsInstance(objects, dict)
+
     def test_new_method(self):
         """
             Tests that the new method sets the right key and value pair
